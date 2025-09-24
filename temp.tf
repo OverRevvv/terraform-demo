@@ -83,3 +83,15 @@ output "ebs_volume_id" {
 output "subnet_id" {
   value = aws_subnet.main.id
 }
+
+resource "aws_instance" "tbd-instances" {
+  count         = 2
+  ami           = "ami-0360c520857e3138f"  # Ubuntu 24.04 LTS AMI (example ID)
+  instance_type = "t2.micro"               # Default instance type
+
+  key_name      = "demokey.pem"
+
+  tags = {
+    Name = "tbd-${count.index + 1}"
+  }
+}
