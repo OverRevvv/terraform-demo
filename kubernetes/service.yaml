@@ -1,0 +1,15 @@
+# the router for traffic (internal)
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+  labels:
+    app: myserviceapp
+spec:
+  type: ClusterIP # type of service (ClusterIP, NodePort, LoadBalancer)
+  selector:
+    batch: myapps
+  ports:
+    # - protocol: TCP
+      port: 80 # port exposed by the service
+      targetPort: 80 # port on the pod to forward traffic to

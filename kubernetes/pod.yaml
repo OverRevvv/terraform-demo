@@ -1,15 +1,14 @@
 apiVersion: v1
 kind: Pod # what kind of k8 object we're working with
 metadata: # basic details about the object
-  name: myapp-pod # name of the pod
+  name: nginx # name of the pod
   labels: # key-value pairs to categorize objects
-    app: myapp
+    app: nginx
+    batch: c44
 spec: # complete details about that object
   containers: # list of containers in the pod
-    - name: myapp-container # name of the container
+    - name: nginx # name of the container
       image: nginx # container image to use
-      ports: # list of ports to expose from the container
-        - containerPort: 80 # port number inside the container
 
 
 
@@ -17,23 +16,39 @@ spec: # complete details about that object
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp-deployment
+  name: nginx-deployment
   labels:
-    app: myapp
+    app: m1-nginx
     state: production
 spec:
-  replicas: 3 # number of pod replicas to run
-  selector: # how to identify the pods managed by this deployment
+  replicas: 3
+  selector:
     matchLabels:
-      app: myapp
-  template: # template for the pods to be created
-    metadata: # basic details about the object
-      name: myapp-pod # name of the pod
-      labels: # key-value pairs to categorize objects
-        app: myapp
-    spec: # complete details about that object
-      containers: # list of containers in the pod
-        - name: myapp-container # name of the container
-          image: nginx # container image to use
-          ports: # list of ports to expose from the container
-            - containerPort: 80 # port number inside the container
+      batch: c44
+      app: nginx
+  template:
+    metadata:
+      labels:
+        batch: c44
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+
+
+# the router for traffic (internal)
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  labels:
+    batch: myserviceapp
+spec:
+  type: ClusterIP
+  selector:
+    batch: c44
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

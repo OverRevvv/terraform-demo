@@ -45,3 +45,6 @@ sudo apt update
 sudo apt install -y ansible
 ansible --version
 
+sudo apt install snap -y
+sudo snap install kubectl --classic
+kubectl version --client
