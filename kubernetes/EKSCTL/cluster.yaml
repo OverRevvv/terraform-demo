@@ -1,0 +1,40 @@
+# Create IAM Role with admin access to the Control plane machine or EKSCTL Cluster
+# Tools required to create EKS Cluster
+# Python, Eksctl, Kubectl, awscli
+
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: my-first-cluster
+  region: us-east-1
+nodeGroups: 
+  - name: ng-1
+    instanceType: t2.small
+    desiredCapacity: 2
+    volumeSize: 20
+availbilityZones: ["us-east-1a", "us-east-1b"]
+    # iam:
+    #   withAddonPolicies:
+    #     autoScaler: true
+    #     externalDNS: true
+    #     certManager: true
+    #     albIngress: true
+    #     ebs: true
+    #     fsx: true
+    #     efs: true
+    #     appMesh: true
+    #     appMeshPreview: true
+    #     cloudWatch: true
+    #     xRay: true
+    #     imageBuilder: true
+    #     ecrReadOnly: true
+    #     albController: true
+    #     kube2iam: true
+    # ssh:
+    #   allow: true # will use ~/.ssh/id_rsa.pub as default key, or provide a key name to use an existing key.
+    #   publicKeyPath: ~/.ssh/id_rsa.pub
+    # tags:
+    #   nodegroup-role: worker-node # add custom tags on all resources created by this nodegroup
+
+# command to create the cluster
+# eksctl create cluster -f cluster.yaml
