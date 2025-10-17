@@ -7,12 +7,13 @@ kind: ClusterConfig
 metadata:
   name: my-first-cluster
   region: us-east-1
-nodeGroups: 
+nodeGroups:
   - name: ng-1
     instanceType: t2.small
     desiredCapacity: 2
     volumeSize: 20
-availbilityZones: ["us-east-1a", "us-east-1b"]
+    # availabilityZones: ["us-east-1a", "us-east-1b"]
+
     # iam:
     #   withAddonPolicies:
     #     autoScaler: true
