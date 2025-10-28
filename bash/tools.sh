@@ -16,9 +16,9 @@ sudo usermod -aG docker $USER
 # nvim --version
 # docker container run -itd -p 8080:8080 -v jenkins:/var/jenkins_home jenkins/jenkins:lts
 
-# sudo add-apt-repository ppa:neovim-ppa/unstable -y  # for latest development version
-# sudo apt update
-# sudo apt install neovim
+sudo add-apt-repository ppa:neovim-ppa/unstable -y  # for latest development version
+sudo apt update
+sudo apt install neovim
 
 # 1. Update package lists
 sudo apt update
